@@ -2,31 +2,57 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import reactLogo from '../../assets/react.svg';
 import './SingIn.css';
+import { login as loginService } from '@/services/AuthService';
+import { getUserGeoInfo } from '@/services/GeoService';
+
 
 function Login() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false); // Estado para controlar o carregamento
   const navigate = useNavigate();
   
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    //console.log(`${name} ${value}`);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const correctPassword = '12345';
+    if (!formData.username || !formData.password) {
+      setError('Preencha todos os campos!');
+      return;
+    }      
 
     setLoading(true); // Ativa o carregamento
     setError(''); // Limpa qualquer erro anterior
 
-    // Simula a verificação de login e senha após 3 segundos
-    setTimeout(() => {
-      if (password === correctPassword) {
-        navigate('/main'); // Redireciona para a página Main após o login
-      } else {
-        setError('Senha incorreta. Tente novamente.');
-      }
+
+    try { 
+      const geoInfo = await getUserGeoInfo();
+      console.log('Localização do usuário:', geoInfo);
+  
+      const authData = await loginService();
+      console.log('Dados de login:', authData);
+  
+      const correctPassword = '12345';
+      // Simula a verificação de login e senha após 3 segundos
+      //setTimeout(() => {
+        if (formData.password === correctPassword) {
+          navigate('/main'); // Redireciona para a página Main após o login
+        } else {
+          setError('Senha incorreta. Tente novamente.');
+        }
+      //}, 3000); // 3 segundos de espera
+    }catch (error){
+      setError('Erro no servidor.');
+    }finally
+    {
       setLoading(false); // Desativa o carregamento
-    }, 3000); // 3 segundos de espera
+    }
+    
   };
 
   const handleForgotPassword = () => {
@@ -41,20 +67,21 @@ function Login() {
       <div className="logo">
         <img src={reactLogo} alt="React Logo" width="80" height="80" />
       </div>
-      <form className="login-form" onSubmit={handleLogin}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
-          name='login'
+          name='username'
           type="text"
           placeholder="Login"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          value={formData.username}
+          onChange={handleChange}
           className="login-input"
         />
         <input
+          name='password'
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
           className="login-input"
         />
         {error && <p className="error-message">{error}</p>}
