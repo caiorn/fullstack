@@ -22,15 +22,8 @@
 }
 
 /* Estilos globais para centralizar o conteúdo */
-body, html {
+ body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: var(--white);
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem; /* rem é uma unidade relativa (1rem = 16px padrão)*/
-
-  }
+} 

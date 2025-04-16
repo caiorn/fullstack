@@ -12,6 +12,8 @@ export default function Home() {
       <SecondaryButton textLabel="Saiba Mais" onClick={() => alert('Saiba Mais clicado!')} />
       <time title="12 de Abril às 11:47h" dateTime='2025-04-12 11:4600'>Publicado há 10min</time>
       {/* Renderiza as subrotas aqui */}
+      <h1></h1>
+ 
       <Outlet />
     </div>
   );

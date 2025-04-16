@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, RouterProvider } from 'react-router-dom';
-import { router } from './router';
+import { router } from './routes/router';
 import Login from './pages/SingIn/SingIn';
 import Main from './pages/Home/Home';
 import GeradorSenhas from './pages/GeradorSenhas/GeradorSenhas';

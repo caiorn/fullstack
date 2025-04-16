@@ -1,74 +1,28 @@
-/* Container do formulário de login */
-.login-container {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-}
-
-/* Estilo da logo */
-.logo {
-  margin-bottom: 1.5rem; /* Espaçamento abaixo da logo */
-}
-
-.logo img {
-  width: 80px; /* Tamanho da logo */
-  height: auto; /* Mantém a proporção */
-}
-
-/* Estilo dos inputs */
-.login-input {
-  width: calc(100% - 1.5rem); /* Ajusta a largura considerando o padding */
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  outline: none;
-}
-
-.login-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Estilo do botão */
-.login-button {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-
-/* Efeito de loading */
-.login-button.loading {
-  background-color: #0056b3;
-  cursor: not-allowed;
-}
-
-.login-button:disabled {
-  background-color: #007bff;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Estilo da mensagem de erro */
-.error-message {
-  color: #ff0000; /* Cor vermelha para o erro */
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-}
+.loading {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    position: relative;
+    transition: 0.3s ease;
+  }
+  
+  .loading::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #999;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: translateY(-50%) rotate(360deg);
+    }
+  }

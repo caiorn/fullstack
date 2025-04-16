@@ -1,0 +1,5 @@
+.navbar-link:hover {
+  color: #4f46e5 !important; /* Simple blue on hover */
+  background: #f3f4f6;
+  transition: background 0.2s, color 0.2s;
+}
