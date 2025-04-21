@@ -27,7 +27,7 @@
 			"quoteStyle": "single",
 			"indentStyle": "tab",
 			"trailingCommas": "none",
-			"bracketSpacing": false,
+			"bracketSpacing": true,
 			"semicolons": "asNeeded"
 		}
 	}
