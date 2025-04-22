@@ -1,6 +1,6 @@
 import * as userRepository from './user-repository.js'
 import bcrypt from 'bcrypt'
-import { createHttpError } from '../../utils/http-errors.js'
+import { AppError } from '../../errors/AppError.js'
 
 const validateUserData = (user) => {
 	const { username, email, senha } = user
@@ -44,15 +44,11 @@ export const getUserByIdService = async (id) => {
 }
 
 export const createUserService = async (validatedUser) => {
-	// try {
 	const { username, email, senha } = validatedUser
 
 	// verifica se o usuário já existe no banco
 	if (await userExists(email, username)) {
-		throw createHttpError(
-			'Já existe um usuário com este username ou e-mail',
-			409
-		)
+		throw new AppError('Já existe um usuário com este username ou e-mail', 409)
 	}
 	const hashedPassword = bcrypt.hashSync(senha, 10)
 	const newUser = await userRepository.insertUser({
@@ -60,14 +56,8 @@ export const createUserService = async (validatedUser) => {
 		email,
 		senha: hashedPassword
 	})
-	if (!newUser) throw new Error('Error inserting user into the database')
+	if (!newUser) throw new AppError('Error inserting user into the database')
 	return newUser
-	// } catch (error) {
-	// 	throw createHttpError(
-	// 		`Erro ao criar usuário: ${error.message}`,
-	// 		error.statusCode
-	// 	)
-	// }
 }
 
 export const updateUserService = async (id, user) => {

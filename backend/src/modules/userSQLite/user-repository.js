@@ -1,5 +1,6 @@
 // src/modules/users/user.repository.js
 import { db } from '../../config/connectionSQLite.js'
+import { AppError } from '../../errors/AppError.js'
 
 // helper para iniciar transação
 const startTransaction = () => {
@@ -56,7 +57,8 @@ const insertUser = async (user) => {
 
 		const lastID = await new Promise((resolve, reject) => {
 			db.run(insertSQL, [username, email, hashedPassword], function (err) {
-				if (err) return reject(err)
+				if (err)
+					return reject(new Error(err.message || 'Erro desconhecido no banco'))
 				resolve(this.lastID)
 			})
 		})
@@ -66,8 +68,7 @@ const insertUser = async (user) => {
 		return { id: lastID, username, email }
 	} catch (err) {
 		await rollbackTransaction()
-		const message = err instanceof Error ? err.message : String(err)
-		throw new Error(`Erro ao inserir usuário: ${message}`)
+		throw err
 	}
 }
 

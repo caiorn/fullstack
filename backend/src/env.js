@@ -1,34 +1,62 @@
 import dotenv from 'dotenv'
 
-// carregar o arquivo .env correspondente ao NODE_ENV (ex: .env.development, .env.test, .env.production)
-dotenv.config({
-	path: `.env.${process.env.NODE_ENV || 'development'}` // Carrega o arquivo .env baseado em NODE_ENV
-})
+class EnvLoader {
+	static instance
 
-const REQUIRED_ENV_VARS = ['DATABASE_URL', 'PORT', 'SQLITE_DB_PATH']
-const errors = []
+	constructor() {
+		if (EnvLoader.instance) {
+			// biome-ignore lint/correctness/noConstructorReturn: <explanation>
+			return EnvLoader.instance
+		}
 
-// validação se todas variaveis de ambiente obrigatórias foram carregadas
-for (const envVar of REQUIRED_ENV_VARS) {
-	if (!process.env[envVar]) {
-		errors.push(`${envVar} is required`)
+		dotenv.config({
+			path: `.env.${process.env.NODE_ENV || 'development'}`
+		})
+
+		const REQUIRED_ENV_VARS = [
+			'DB_HOST',
+			'DB_USER',
+			'DB_PORT',
+			'DB_PASS',
+			'DB_NAME',
+			'PORT',
+			'SQLITE_DB_PATH'
+		]
+
+		const errors = []
+		for (const envVar of REQUIRED_ENV_VARS) {
+			if (!process.env[envVar]) {
+				errors.push(`${envVar} is required`)
+			}
+		}
+		if (errors.length > 0) {
+			console.info(
+				`❌ Erro ao carregar variáveis em .env.${process.env.NODE_ENV}`
+			)
+			throw new Error(`Failed to load env file: ${errors.join(', ')}`)
+		}
+
+		this.env = {
+			NODE_ENV: process.env.NODE_ENV || 'development',
+			HOST: process.env.HOST || 'localhost',
+			PORT: Number(process.env.PORT || 3333),
+			DB_HOST: process.env.DB_HOST,
+			DB_USER: process.env.DB_USER,
+			DB_PORT: Number(process.env.DB_PORT || 3306),
+			DB_PASS: process.env.DB_PASS,
+			DB_NAME: process.env.DB_NAME,
+			SQLITE_DB_PATH: process.env.SQLITE_DB_PATH,
+			DATABASE_URL: process.env.DATABASE_URL || 'sqlite://db.sqlite'
+		}
+
+		if (this.env.NODE_ENV !== 'production') {
+			console.info('🟢 Env file loaded', this.env)
+		}
+
+		EnvLoader.instance = this
 	}
 }
 
-if (errors.length > 0) {
-	console.info(`❌ Erro ao carregar variaveis em .env.${process.env.NODE_ENV}`)
-	throw new Error(` Failed to load env file ${errors.join(', ')}`)
-}
+const { env } = new EnvLoader()
 
-//ambiente para intellisense e valores default
-export const env = {
-	SQLITE_DB_PATH: process.env.SQLITE_DB_PATH,
-	NODE_ENV: process.env.NODE_ENV || 'development',
-	DATABASE_URL: process.env.DATABASE_URL || 'sqlite://db.sqlite',
-	PORT: Number(process.env.PORT || 3333)
-}
-
-console.info(
-	'🟢 Env file loaded',
-	...(env.NODE_ENV !== 'production' ? [env] : [])
-)
+export { env }

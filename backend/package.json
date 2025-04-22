@@ -6,9 +6,9 @@
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development node --watch src/server.js",
 		"prod": "cross-env NODE_ENV=production node --watch src/server.js",
-		"teste": "cross-env NODE_ENV=test node --watch src/server.js",
+		"test": "cross-env NODE_ENV=test node --watch src/server.js",
 		"pm2prod": "cross-env NODE_ENV=development node --watch src/server.js",
-		"test": "npx vitest run",
+		"vitest": "npx vitest run",
 		"test:watch": "npx vitest"
 	},
 	"keywords": [],
@@ -26,6 +26,7 @@
 		"bcrypt": "^5.1.1",
 		"dotenv": "^16.5.0",
 		"fastify": "^5.3.2",
+		"mysql2": "^3.14.0",
 		"sqlite3": "^5.1.7",
 		"zod": "^3.24.3"
 	}

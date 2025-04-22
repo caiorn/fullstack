@@ -50,9 +50,10 @@ export const createUserController = async (request, reply) => {
 		})
 	} catch (err) {
 		request.log.error(err)
+		console.log(err)
 		return reply
 			.status(err.statusCode || 500)
-			.send(err.message || 'Erro interno no servidor')
+			.send(`${err.message}` || 'Erro interno no servidor')
 	}
 }
 
