@@ -1,54 +1,73 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+	return (
+		<nav className="menu" role="navigation" aria-label="Menu principal">
+			<div
+				className="menu-item"
+				tabIndex="0"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				<Link to="#">Arquivo</Link>
+				<div className="dropdown-content">
+					<Link to="#">Abrir</Link>
+					<Link to="#">Salvar</Link>
+					<Link to="#">Sair</Link>
+					<div className="submenu-item">
+						<Link to="#">Mais opções</Link>
+						<div className="submenu">
+							<Link to="#">Exportar</Link>
+							<Link to="#">Importar</Link>
+							<Link to="#">Configurações Avançadas</Link>
+						</div>
+					</div>
+				</div>
+			</div>
 
-  return (
-    <div style={{ position: 'relative' }}>
-      <button       
-        onClick={() => setOpen(!open)}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          width: '24px',
-          height: '16px',
-          background: 'transparent',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0
-        }}
-        aria-label="Menu"
-      >
-        <span style={{ height: '3px', background: '#333', borderRadius: '2px' }} />
-        <span style={{ height: '3px', background: '#333', borderRadius: '2px' }} />
-        <span style={{ height: '3px', background: '#333', borderRadius: '2px' }} />
-      </button>
+			<div
+				className="menu-item"
+				tabIndex="0"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				<Link to="#">Configurações</Link>
+				<div className="dropdown-content">
+					<Link to="#">Preferências</Link>
+					<Link to="#">Contas</Link>
+					<Link to="#">Notificações</Link>
+					<div className="submenu-item">
+						<Link to="#">Avançadas</Link>
+						<div className="submenu">
+							<Link to="#">Modo Escuro</Link>
+							<Link to="#">Sincronizar</Link>
+							<Link to="#">Recuperação de Dados</Link>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      {open && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '30px',
-            left: 0,
-            backgroundColor: '#fff',
-            border: '1px solid #ccc',
-            borderRadius: '6px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-            padding: '10px',
-            minWidth: '150px'
-          }}
-        >
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <Link to="/main" className="navbar-link" style={{ textDecoration: 'none', color: '#333' }}> Home</Link>
-            <Link to="/dashboard" className="navbar-link" style={{ textDecoration: 'none', color: '#333' }}> Dashboard</Link>
-            <Link to="/settings" className="navbar-link" style={{ textDecoration: 'none', color: '#333' }}> Configurações</Link>
-            <Link to="/" className="navbar-link" style={{ textDecoration: 'none', color: '#d00' }}> Sair</Link>
-          </nav>
-        </div>
-      )}
-    </div>
-  )
+			<div
+				className="menu-item"
+				tabIndex="0"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				<Link to="#">Ajuda</Link>
+				<div className="dropdown-content">
+					<Link to="#">Documentação</Link>
+					<Link to="#">Suporte</Link>
+					<div className="submenu-item">
+						<Link to="#">Mais Ajuda</Link>
+						<div className="submenu">
+							<Link to="#">FAQ</Link>
+							<Link to="#">Fórum</Link>
+							<Link to="#">Relatar Problema</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	)
 }
