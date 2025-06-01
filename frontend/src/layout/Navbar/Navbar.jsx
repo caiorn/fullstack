@@ -3,13 +3,51 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
 	return (
-		<nav className="menu" role="navigation" aria-label="Menu principal">
-			<div
-				className="menu-item"
-				tabIndex="0"
-				aria-haspopup="true"
-				aria-expanded="false"
-			>
+		<nav className="menu" aria-label="Menu principal">
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
+				<Link to="#">Fundamentos</Link>
+				<div className="dropdown-content">
+					<Link to="/main/biblioteca-lista">Biblioteca de Listas</Link>
+					<Link to="/main/geradorsenhas">Gerador de Senhas</Link>
+					<Link to="#">HTML5</Link>
+					<Link to="#">CSS</Link>
+					<div className="submenu-item">
+						<Link to="#">JavaScript</Link>
+						<div className="submenu">
+							<Link to="#">Promisses</Link>
+							<Link to="#">useState</Link>
+							<Link to="#">use</Link>
+						</div>
+					</div>
+					<div className="submenu-item">
+						<Link to="#">React</Link>
+						<div className="submenu">
+							<Link to="#">useEffect</Link>
+							<Link to="#">useState</Link>
+							<Link to="#">use</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
+				<Link to="#">AntDesign</Link>
+				<div className="dropdown-content">
+					<Link to="#">teste</Link>
+					<Link to="#">Salvar</Link>
+					<Link to="#">Sair</Link>
+					<div className="submenu-item">
+						<Link to="#">GridView</Link>
+						<div className="submenu">
+							<Link to="#">Exportar</Link>
+							<Link to="#">Importar</Link>
+							<Link to="#">Configurações Avançadas</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
 				<Link to="#">Arquivo</Link>
 				<div className="dropdown-content">
 					<Link to="#">Abrir</Link>
@@ -26,12 +64,7 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			<div
-				className="menu-item"
-				tabIndex="0"
-				aria-haspopup="true"
-				aria-expanded="false"
-			>
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
 				<Link to="#">Configurações</Link>
 				<div className="dropdown-content">
 					<Link to="#">Preferências</Link>
@@ -48,12 +81,7 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			<div
-				className="menu-item"
-				tabIndex="0"
-				aria-haspopup="true"
-				aria-expanded="false"
-			>
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
 				<Link to="#">Ajuda</Link>
 				<div className="dropdown-content">
 					<Link to="#">Documentação</Link>

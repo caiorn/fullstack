@@ -6,7 +6,7 @@ const inProduction = process.env.NODE_ENV === 'production'
 export const app = fastify({
 	logger: !inProduction
 		? {
-				level: 'debug',
+				level: 'warn', // Mostra apenas mensagens de aviso ou erro
 				transport: {
 					target: 'pino-pretty',
 					options: {
