@@ -31,6 +31,15 @@ export default function Navbar() {
 			</div>
 
 			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
+				<Link to="#">WebSockets</Link>
+				<div className="dropdown-content">
+					<Link to="/main/websockets/sample">ToogleButton and Increment</Link>
+					<Link to="/main/websockets/chat1">Chat1</Link>
+					<Link to="/main/websockets/chat2">Chat2</Link>
+				</div>
+			</div>
+
+			<div className="menu-item" aria-haspopup="true" aria-expanded="false">
 				<Link to="#">AntDesign</Link>
 				<div className="dropdown-content">
 					<Link to="#">teste</Link>

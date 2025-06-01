@@ -1,5 +1,6 @@
 import { Server } from 'socket.io'
-import { handleChatEvents } from './controllers/chatController.js'
+import { registerChatEvents } from './sockets/chat2.js'
+import { registerToggleAndIncrementEvents } from './sockets/toogle.js'
 
 export function configureSocketIO(httpServer) {
 	const io = new Server(httpServer, {
@@ -13,10 +14,18 @@ export function configureSocketIO(httpServer) {
 	})
 
 	io.on('connection', (socket) => {
-		console.log('🔌 cliente conectado:', socket.id)
+		console.log('🔌 Cliente conectado:', socket.id);
+		console.log('Número de clientes conectados:', io.engine.clientsCount);
+		socket.on('disconnect', (reason) => {
+			console.log(`🔌 Cliente desconectado: ${socket.id}. Motivo: ${reason}`);
+		});
+		socket.on('error', (err) => {
+			console.error(`🔌 Erro no socket ${socket.id}:`, err);
+		});
 
-		// Delega a lógica do chat para o controlador
-		handleChatEvents(io, socket)
+		registerChatEvents(io, socket)
+		registerToggleAndIncrementEvents(io, socket)
+
 	})
 
 	return io

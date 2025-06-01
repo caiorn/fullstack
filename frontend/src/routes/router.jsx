@@ -10,7 +10,8 @@ import Equipament from '../pages/Equipament/Equipament'
 import loadEquipament from '../loaders/EquipamentsLoader'
 import EquipamentBoundary from '../error-boundaries/EquipamentBoundary'
 import PrivateRoute from './PrivateRoute' // Importa o componente de rota privada
-import Chat from '../pages/09-Chat2/Chat'
+import Chat from '../pages/07-WebSockets/4-Chat2/Chat'
+import StatusAndIncrement from '../pages/07-WebSockets/1-Samples/StatusAndIncrement'
 
 const router = createBrowserRouter([
 	{
@@ -30,7 +31,15 @@ const router = createBrowserRouter([
 				)
 			},
 			{
-				path: 'chat',
+				path: 'websockets/sample',
+				element: (
+					<PrivateRoute>
+						<StatusAndIncrement />
+					</PrivateRoute>
+				) // Protege a rota com PrivateRoute
+			},
+			{
+				path: 'websockets/chat2',
 				element: (
 					<PrivateRoute>
 						<Chat />

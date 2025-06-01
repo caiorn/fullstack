@@ -6,8 +6,10 @@ import './App.css'
 console.log('Iniciando o aplicativo... 1')
 
 createRoot(document.getElementById('root')).render(
-	<StrictMode>
-		<App />
-		{/* <RouterProvider router={router} /> */}
-	</StrictMode>
+	<App />
 )
+
+// <StrictMode>
+// 	<App />
+// 	{/* <RouterProvider router={router} /> */}
+// </StrictMode>
